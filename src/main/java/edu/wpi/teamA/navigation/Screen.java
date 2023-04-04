@@ -2,6 +2,7 @@ package edu.wpi.teamA.navigation;
 
 public enum Screen {
   ROOT("views/Root.fxml"),
+  LOGIN("views/LoginPage.fxml"),
   HOME("views/Home.fxml"),
   SERVICE_REQUEST("views/ServiceRequest.fxml"),
   MAP("views/Map.fxml"),
