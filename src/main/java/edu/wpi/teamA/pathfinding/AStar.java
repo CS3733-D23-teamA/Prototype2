@@ -4,7 +4,7 @@ import edu.wpi.teamA.database.ORMclasses.Edge;
 import java.util.ArrayList;
 
 public class AStar {
-  private final Graph graph = new Graph();
+  private Graph graph = new Graph();
   private final int startID;
   private final int endID;
 
@@ -12,6 +12,13 @@ public class AStar {
 
   public AStar(int startID, int endID) {
     graph.prepGraph();
+    this.startID = startID;
+    this.endID = endID;
+    this.path = setPath();
+  }
+
+  public AStar(Graph graph, int startID, int endID) {
+    this.graph = graph;
     this.startID = startID;
     this.endID = endID;
     this.path = setPath();
