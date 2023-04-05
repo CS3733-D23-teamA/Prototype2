@@ -4,12 +4,19 @@ import edu.wpi.teamA.database.ORMclasses.Edge;
 import java.util.ArrayList;
 
 public class BFS {
-  private final Graph graph = new Graph();
+  private Graph graph = new Graph();
   int startID, endID;
   private ArrayList<Integer> path = new ArrayList<Integer>();
 
   public BFS(int startID, int endID) {
     this.graph.prepGraph();
+    this.startID = startID;
+    this.endID = endID;
+    setPath();
+  }
+
+  public BFS(Graph graph, int startID, int endID) {
+    this.graph = graph;
     this.startID = startID;
     this.endID = endID;
     this.path = setPath();
@@ -69,6 +76,8 @@ public class BFS {
     ArrayList<Integer> path = getOrder(startID, endID);
 
     resetNodes(nodesToReset);
+
+    this.path = path;
 
     return path;
   }

@@ -11,7 +11,7 @@ public class AStar {
   private ArrayList<Integer> path = new ArrayList<Integer>();
 
   public AStar(int startID, int endID) {
-    graph.prepGraph();
+    this.graph.prepGraph();
     this.startID = startID;
     this.endID = endID;
     setPath();
@@ -174,7 +174,7 @@ public class AStar {
     String stringPath = "Start at node " + path.get(0);
 
     for (int i = 1; i < path.size(); i++) {
-      stringPath = stringPath + ", then go to node " + path.get(i);
+      stringPath += ", then go to node " + path.get(i);
     }
 
     return stringPath + ". You have reached your destination.";
