@@ -17,6 +17,10 @@ public class AStar {
     setPath();
   }
 
+  public ArrayList<Integer> getPath() {
+    return path;
+  }
+
   public AStar(Graph graph, int startID, int endID) {
     this.graph = graph;
     this.startID = startID;

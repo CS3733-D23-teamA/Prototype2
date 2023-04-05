@@ -22,6 +22,10 @@ public class BFS {
     this.path = setPath();
   }
 
+  public ArrayList<Integer> getPath() {
+    return path;
+  }
+
   /**
    * setPath: BFS Algorithm Implementation
    *
