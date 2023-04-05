@@ -12,7 +12,7 @@ public class BFS {
     this.graph.prepGraph();
     this.startID = startID;
     this.endID = endID;
-    this.path = setPath();
+    setPath();
   }
 
   public BFS(Graph graph, int startID, int endID) {
@@ -77,6 +77,8 @@ public class BFS {
 
     resetNodes(nodesToReset);
 
+    this.path = path;
+
     return path;
   }
 
@@ -121,7 +123,7 @@ public class BFS {
     String stringPath = "Start at node " + path.get(0);
 
     for (int i = 1; i < path.size(); i++) {
-      stringPath = ", then go to node " + path.get(i);
+      stringPath = stringPath + ", then go to node " + path.get(i);
     }
 
     return stringPath + ". You have reached your destination.";
