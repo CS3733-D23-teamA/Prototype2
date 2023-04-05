@@ -4,7 +4,7 @@ import edu.wpi.teamA.database.ORMclasses.Edge;
 import java.util.ArrayList;
 
 public class BFS {
-  private Graph graph = new Graph();
+  private final Graph graph = new Graph();
   int startID, endID;
   private ArrayList<Integer> path = new ArrayList<Integer>();
 
@@ -12,13 +12,7 @@ public class BFS {
     this.graph.prepGraph();
     this.startID = startID;
     this.endID = endID;
-    setPath();
-  }
-
-  public BFS(Graph graph, int startID, int endID) {
-    this.graph = graph;
-    this.startID = startID;
-    this.endID = endID;
+    this.path = setPath();
   }
 
   /**
@@ -30,7 +24,6 @@ public class BFS {
 
     ArrayList<Integer> queue = new ArrayList<>();
     ArrayList<Integer> nodesToReset = new ArrayList<>();
-    nodesToReset.add(startID);
 
     int currentID = startID;
     System.out.println(currentID);
@@ -77,8 +70,6 @@ public class BFS {
 
     resetNodes(nodesToReset);
 
-    this.path = path;
-
     return path;
   }
 
@@ -123,7 +114,7 @@ public class BFS {
     String stringPath = "Start at node " + path.get(0);
 
     for (int i = 1; i < path.size(); i++) {
-      stringPath = stringPath + ", then go to node " + path.get(i);
+      stringPath += ", then go to node " + path.get(i);
     }
 
     return stringPath + ". You have reached your destination.";
