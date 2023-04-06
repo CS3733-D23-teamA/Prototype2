@@ -33,19 +33,6 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
     }
   }
 
-  public static Connection createConnection() {
-    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
-    String user = "teama";
-    String password = "teama10";
-
-    try {
-      return DriverManager.getConnection(url, user, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
   public static ArrayList<Edge> loadEdgesFromCSV(String filePath) {
     ArrayList<Edge> edges = new ArrayList<>();
 
@@ -103,8 +90,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            edgeProvider
-                .createConnection()
+            edgeProvider.createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Edge\" VALUES (?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setInt(2, Integer.parseInt(data[1]));
@@ -174,8 +160,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
       int endNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider
-              .createConnection()
+          edgeProvider.createConnection()
               .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Edge\" VALUES (?, ?)");
       ps.setInt(1, startNode);
       ps.setInt(2, endNode);

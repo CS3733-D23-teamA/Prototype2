@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class FlowerDAOImpl implements IFlowerDAO {
-  ArrayList<FlowerEntity> flowerArray = new ArrayList<>();
+  ArrayList<FlowerEntity> flowerArray;
   static DBConnectionProvider flowerProvider = new DBConnectionProvider();
 
   public FlowerDAOImpl() {
@@ -67,8 +67,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
 
     try {
       PreparedStatement ps =
-          flowerProvider
-              .createConnection()
+          flowerProvider.createConnection()
               .prepareStatement("DELETE FROM \"Prototype2_schema\".\"Flower\" WHERE name = ?");
       ps.setString(1, flower.getName());
       ps.executeUpdate();
