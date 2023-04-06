@@ -1,5 +1,8 @@
 package edu.wpi.teamA.controllers.Navigation;
 
+import edu.wpi.teamA.database.DAOImps.UserDAOImp;
+import edu.wpi.teamA.navigation.Navigation;
+import edu.wpi.teamA.navigation.Screen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,11 +20,17 @@ public class LoginController {
   @FXML private PasswordField passwordTextField;
 
   public void loginButtonOnAction(ActionEvent e) {
-    if (usernameTextField.getText().isBlank() == true) {
+    UserDAOImp checker = new UserDAOImp();
+    String username = usernameTextField.getText();
+    String password = passwordTextField.getText();
+    if (username.isBlank() == true) {
       loginMessageLabel.setText("Please enter username");
-    } else if (passwordTextField.getText().isBlank() == true) {
+    } else if (password.isBlank() == true) {
       loginMessageLabel.setText("Please enter password");
     } else {
+      if (checker.checkUser(username, password)) {
+        Navigation.navigate(Screen.HOME);
+      }
       loginMessageLabel.setText("You tried to log in");
     }
   }
