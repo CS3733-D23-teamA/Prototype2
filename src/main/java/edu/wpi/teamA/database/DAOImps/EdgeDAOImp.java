@@ -174,8 +174,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
       int endNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider
-              .createConnection()
+          edgeProvider.createConnection()
               .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Edge\" VALUES (?, ?)");
       ps.setInt(1, startNode);
       ps.setInt(2, endNode);
@@ -200,8 +199,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
       int endNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider
-              .createConnection()
+          edgeProvider.createConnection()
               .prepareStatement(
                   "DELETE FROM \"Prototype2_schema\".\"Edge\" WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, startNode);
@@ -230,8 +228,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
       int newEndNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider
-              .createConnection()
+          edgeProvider.createConnection()
               .prepareStatement(
                   "UPDATE \"Prototype2_schema\".\"Edge\" SET startNode = ?, endNode = ? WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, newStartNode);
