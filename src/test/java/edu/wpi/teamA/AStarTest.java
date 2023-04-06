@@ -93,4 +93,18 @@ public class AStarTest {
     actual_path = aStar4.getPath();
     assertEquals(expected_path, actual_path);
   }
+
+  @Test
+  public void testToStringBFS() {
+    AStar aStar1 = new AStar(graph, 11, 13);
+    String expectedString =
+        "Start at node 11, then go to node 12, then go to node 13. You have reached your destination.";
+    String actualString = aStar1.toString();
+    assertEquals(expectedString, actualString);
+
+    AStar aStar2 = new AStar(graph, 11, 11);
+    expectedString = "Wow! You're already there! Good Job!";
+    actualString = aStar2.toString();
+    assertEquals(expectedString, actualString);
+  }
 }
