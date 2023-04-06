@@ -30,6 +30,18 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     }
   }
 
+  public static Connection createConnection() {
+    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
+    String user = "teama";
+    String password = "teama10";
+
+    try {
+      return DriverManager.getConnection(url, user, password);
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
 
   public static ArrayList<LocationName> loadLocNamesFromCSV(String filePath) {
     ArrayList<LocationName> locationNames = new ArrayList<>();
