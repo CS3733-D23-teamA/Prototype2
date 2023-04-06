@@ -40,7 +40,7 @@ public class UserLoginDAO {
     try {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
-              .prepareStatement("SELECT * FROM users WHERE userName = ?");
+                  .prepareStatement("SELECT * FROM users WHERE userName = ?");
       ps.setString(1, userName);
       ResultSet rs = ps.executeQuery();
 
@@ -72,6 +72,7 @@ public class UserLoginDAO {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
               .prepareStatement(
+
                   "INSERT INTO users (userName, password, firstName, lastName) VALUES (?, ?, ?, ?)");
       ps.setString(1, userName);
       ps.setString(2, password);

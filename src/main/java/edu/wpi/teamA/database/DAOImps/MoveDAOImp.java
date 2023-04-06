@@ -34,18 +34,6 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     }
   }
 
-  public static Connection createConnection() {
-    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
-    String user = "teama";
-    String password = "teama10";
-
-    try {
-      return DriverManager.getConnection(url, user, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
 
   public static ArrayList<Move> loadMovesFromCSV(String filePath) {
     ArrayList<Move> moves = new ArrayList<>();
@@ -96,8 +84,7 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            moveProvider
-                .createConnection()
+            moveProvider.createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setString(2, data[1]);
