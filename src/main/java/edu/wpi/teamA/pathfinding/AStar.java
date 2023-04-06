@@ -53,13 +53,14 @@ public class AStar {
   /**
    * pathOfNodesAStar: A* Algorithm Implementation
    *
-   * @param startID
-   * @param endID
    * @return path of nodes
    */
   public ArrayList<Integer> setPath() {
     ArrayList<Integer> queue = new ArrayList<>();
     ArrayList<Integer> nodesToReset = new ArrayList<>();
+
+    nodesToReset.add(startID);
+    // queue.add(startID);
 
     GraphNode endNode = graph.getGraphNode(endID);
     int endX = endNode.getXcoord();
