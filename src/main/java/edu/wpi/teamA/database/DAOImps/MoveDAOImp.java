@@ -124,6 +124,27 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
       throw new RuntimeException(e);
     }
   }
+  public ArrayList<Move> loadMovesFromDatabase() {
+    ArrayList<Move> moves = new ArrayList<>();
+
+    try {
+      Statement st = moveProvider.createConnection().createStatement();
+      ResultSet rs = st.executeQuery("SELECT * FROM \"Prototype2_schema\".\"Move\"");
+
+      while (rs.next()) {
+        int nodeID = rs.getInt("nodeID");
+        String longName = rs.getString("longName");
+        LocalDate localDate = rs.getDate("localDate").toLocalDate();
+
+        Move move = new Move(nodeID, longName, localDate);
+        moves.add(move);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return moves;
+  }
 
   /** create a new instance of Move and Insert the new object into database */
   @Override
