@@ -21,7 +21,21 @@ public class FooterController {
     int day = LocalDateTime.now().getDayOfMonth();
     int month = LocalDateTime.now().getMonthValue();
     int year = LocalDateTime.now().getYear();
-    String time = month + "/" + day + "/" + year + " " + hour + ":" + minute + ":" + second;
+
+    String secondStr = Integer.toString(second);
+    String minuteStr = Integer.toString(minute);
+    String hourStr = Integer.toString(hour);
+    if (secondStr.length() == 1) {
+      secondStr = "0" + secondStr;
+    }
+    if (minuteStr.length() == 1) {
+      minuteStr = "0" + minuteStr;
+    }
+    if (hourStr.length() == 1) {
+      hourStr = "0" + hourStr;
+    }
+    String time =
+        month + "/" + day + "/" + year + " " + hourStr + ":" + minuteStr + ":" + secondStr;
     return time;
   }
 

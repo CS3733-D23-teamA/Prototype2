@@ -21,7 +21,7 @@
             <MenuItem fx:id="mapMenu" mnemonicParsing="false" text="Map" />
             <MenuItem fx:id="signageMenu" mnemonicParsing="false" text="Signage" />
             <MenuItem fx:id="pathfindingMenu" mnemonicParsing="false" text="Pathfinding" />
-            <MenuItem fx:id="exit" mnemonicParsing="false" text="Exit" />
+            <MenuItem fx:id="exitMenu" mnemonicParsing="false" text="Exit" />
          </items>
          <font>
             <Font name="Open Sans Bold" size="12.0" />
