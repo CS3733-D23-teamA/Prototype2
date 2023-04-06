@@ -62,7 +62,7 @@ public class BFSTest {
     expected_path.add(11);
     expected_path.add(12);
     expected_path.add(13);
-    ArrayList<Integer> actual_path = bfs1.setPath();
+    ArrayList<Integer> actual_path = bfs1.getPath();
     assertEquals(expected_path, actual_path);
 
     BFS bfs2 = new BFS(graph, 13, 11);
@@ -70,14 +70,14 @@ public class BFSTest {
     expected_path.add(13);
     expected_path.add(12);
     expected_path.add(11);
-    actual_path = bfs2.setPath();
+    actual_path = bfs2.getPath();
     assertEquals(expected_path, actual_path);
 
     BFS bfs3 = new BFS(graph, 11, 15);
     expected_path = new ArrayList<Integer>();
     expected_path.add(11);
     expected_path.add(15);
-    actual_path = bfs3.setPath();
+    actual_path = bfs3.getPath();
     assertEquals(expected_path, actual_path);
 
     BFS bfs4 = new BFS(graph, 11, 16);
@@ -87,7 +87,7 @@ public class BFSTest {
     expected_path.add(13);
     expected_path.add(14);
     expected_path.add(16);
-    actual_path = bfs4.setPath();
+    actual_path = bfs4.getPath();
     assertEquals(expected_path, actual_path);
   }
 
@@ -96,13 +96,11 @@ public class BFSTest {
     BFS bfs1 = new BFS(graph, 11, 13);
     String expectedString =
         "Start at node 11, then go to node 12, then go to node 13. You have reached your destination.";
-    bfs1.setPath();
     String actualString = bfs1.toString();
     assertEquals(expectedString, actualString);
 
     BFS bfs2 = new BFS(graph, 11, 11);
-    expectedString = "Start at node 11. You have reached your destination.";
-    bfs2.setPath();
+    expectedString = "Wow! You're already there! Good Job!";
     actualString = bfs2.toString();
     assertEquals(expectedString, actualString);
   }

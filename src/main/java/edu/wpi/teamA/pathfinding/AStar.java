@@ -25,7 +25,7 @@ public class AStar {
     this.graph = graph;
     this.startID = startID;
     this.endID = endID;
-    this.path = setPath();
+    setPath();
   }
 
   //    public class Wrapping {
@@ -55,12 +55,14 @@ public class AStar {
    *
    * @return path of nodes
    */
-  public ArrayList<Integer> setPath() {
+  private ArrayList<Integer> setPath() {
     ArrayList<Integer> queue = new ArrayList<>();
     ArrayList<Integer> nodesToReset = new ArrayList<>();
 
     nodesToReset.add(startID);
     // queue.add(startID);
+
+    nodesToReset.add(startID);
 
     GraphNode endNode = graph.getGraphNode(endID);
     int endX = endNode.getXcoord();
@@ -176,12 +178,20 @@ public class AStar {
   }
 
   public String toString() {
-    String stringPath = "Start at node " + path.get(0);
 
-    for (int i = 1; i < path.size(); i++) {
-      stringPath += ", then go to node " + path.get(i);
+    String stringPath = "Wow! You're already there! Good Job!";
+
+    if (startID != endID) {
+
+      stringPath = "Start at node " + path.get(0);
+
+      for (int i = 1; i < path.size(); i++) {
+        stringPath += ", then go to node " + path.get(i);
+      }
+
+      stringPath += ". You have reached your destination.";
     }
 
-    return stringPath + ". You have reached your destination.";
+    return stringPath;
   }
 }
