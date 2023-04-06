@@ -27,6 +27,7 @@ import javafx.stage.FileChooser;
 public class MapController implements IPageController {
 
   // Node table
+  private NodeDAOImp nodeDAO = new NodeDAOImp();
   @FXML private TableView<Node> nodeTable;
   @FXML private TableColumn<Node, Integer> nodeIDCol;
   @FXML private TableColumn<Node, Integer> xCoorCol;
@@ -35,18 +36,21 @@ public class MapController implements IPageController {
   @FXML private TableColumn<Node, String> buildingCol;
 
   // Location Name table
+  private LocNameDAOImp locNameDAO = new LocNameDAOImp();
   @FXML private TableView<LocationName> locationNameTable;
   @FXML private TableColumn<LocationName, String> longNameCol;
   @FXML private TableColumn<LocationName, String> shortNameCol;
   @FXML private TableColumn<LocationName, String> nodeTypeCol;
 
   // Move table
+  private MoveDAOImp moveDAO = new MoveDAOImp();
   @FXML private TableView<Move> moveTable;
   @FXML private TableColumn<Move, Integer> moveNodeIDCol;
   @FXML private TableColumn<Move, String> moveLongNameCol;
   @FXML private TableColumn<Move, LocalDate> dateCol;
 
   // Edge table
+  private EdgeDAOImp edgeDAO = new EdgeDAOImp();
   @FXML private TableView<Edge> edgeTable;
   @FXML private TableColumn<Edge, Integer> startNodeCol;
   @FXML private TableColumn<Edge, Integer> endNodeCol;
@@ -70,6 +74,10 @@ public class MapController implements IPageController {
     moveExportButton.setOnMouseClicked(event -> exportMoveCSV());
     edgeImportButton.setOnMouseClicked(event -> importEdgeCSV());
     edgeExportButton.setOnMouseClicked(event -> exportEdgeCSV());
+    displayNodeData(nodeDAO.loadNodesFromDatabase());
+    displayLocNameData(locNameDAO.loadLocNamefromDatabase());
+    displayMoveData(moveDAO.loadMovesFromDatabase());
+    displayEdgeData(edgeDAO.loadEdgesFromDatabase());
   }
 
   @Override

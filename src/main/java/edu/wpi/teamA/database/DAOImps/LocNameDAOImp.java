@@ -20,6 +20,10 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     this.LocNameArray = LocNameArray;
   }
 
+  public LocNameDAOImp() {
+    this.LocNameArray = new ArrayList<LocationName>();
+  }
+
   public static void createSchema() {
     try {
       Statement stmtSchema = LocNameProvider.createConnection().createStatement();
@@ -129,6 +133,7 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
       throw new RuntimeException(e);
     }
   }
+
   public ArrayList<LocationName> loadLocNamefromDatabase() {
     ArrayList<LocationName> locationNames = new ArrayList<>();
 
@@ -150,7 +155,6 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
 
     return locationNames;
   }
-
 
   @Override
   public void Add() {}

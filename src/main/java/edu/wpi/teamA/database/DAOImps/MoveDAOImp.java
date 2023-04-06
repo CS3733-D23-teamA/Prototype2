@@ -24,6 +24,10 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     this.MoveArray = MoveArray;
   }
 
+  public MoveDAOImp() {
+    this.MoveArray = new ArrayList<Move>();
+  }
+
   public static void createSchema() {
     try {
       Statement stmtSchema = moveProvider.createConnection().createStatement();
@@ -33,7 +37,6 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
       throw new RuntimeException(e);
     }
   }
-
 
   public static ArrayList<Move> loadMovesFromCSV(String filePath) {
     ArrayList<Move> moves = new ArrayList<>();
@@ -84,7 +87,8 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            moveProvider.createConnection()
+            moveProvider
+                .createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setString(2, data[1]);
@@ -124,6 +128,7 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
       throw new RuntimeException(e);
     }
   }
+
   public ArrayList<Move> loadMovesFromDatabase() {
     ArrayList<Move> moves = new ArrayList<>();
 
