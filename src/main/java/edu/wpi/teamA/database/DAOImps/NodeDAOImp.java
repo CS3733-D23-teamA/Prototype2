@@ -24,15 +24,6 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
     this.NodeArray = new ArrayList<Node>();
   }
 
-  public static void createSchema() {
-    try {
-      Statement stmtSchema = nodeProvider.createConnection().createStatement();
-      String sqlCreateSchema = "CREATE SCHEMA IF NOT EXISTS \"Prototype2_schema\"";
-      stmtSchema.execute(sqlCreateSchema);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-  }
 
   // ResultSet
 
@@ -67,7 +58,6 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
   }
 
   public static ArrayList<Node> Import(String filePath) {
-    NodeDAOImp.createSchema();
     ArrayList<Node> NodeArray = loadNodesFromCSV(filePath);
 
     try {
