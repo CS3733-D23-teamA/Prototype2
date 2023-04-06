@@ -36,6 +36,8 @@ public class BFS {
     ArrayList<Integer> queue = new ArrayList<>();
     ArrayList<Integer> nodesToReset = new ArrayList<>();
 
+    nodesToReset.add(startID);
+
     int currentID = startID;
     System.out.println(currentID);
 
