@@ -129,6 +129,28 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
       throw new RuntimeException(e);
     }
   }
+  public ArrayList<LocationName> loadLocNamefromDatabase() {
+    ArrayList<LocationName> locationNames = new ArrayList<>();
+
+    try {
+      Statement st = LocNameProvider.createConnection().createStatement();
+      ResultSet rs = st.executeQuery("SELECT * FROM \"Prototype2_schema\".\"LocationName\"");
+
+      while (rs.next()) {
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
+        String nodeType = rs.getString("nodeType");
+
+        LocationName locationName = new LocationName(longName, shortName, nodeType);
+        locationNames.add(locationName);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return locationNames;
+  }
+
 
   @Override
   public void Add() {}

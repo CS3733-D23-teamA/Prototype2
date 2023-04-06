@@ -34,18 +34,6 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     }
   }
 
-  public static Connection createConnection() {
-    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
-    String user = "teama";
-    String password = "teama10";
-
-    try {
-      return DriverManager.getConnection(url, user, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
 
   public static ArrayList<Move> loadMovesFromCSV(String filePath) {
     ArrayList<Move> moves = new ArrayList<>();
@@ -96,8 +84,7 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            moveProvider
-                .createConnection()
+            moveProvider.createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setString(2, data[1]);
@@ -136,6 +123,27 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     } catch (SQLException | IOException e) {
       throw new RuntimeException(e);
     }
+  }
+  public ArrayList<Move> loadMovesFromDatabase() {
+    ArrayList<Move> moves = new ArrayList<>();
+
+    try {
+      Statement st = moveProvider.createConnection().createStatement();
+      ResultSet rs = st.executeQuery("SELECT * FROM \"Prototype2_schema\".\"Move\"");
+
+      while (rs.next()) {
+        int nodeID = rs.getInt("nodeID");
+        String longName = rs.getString("longName");
+        LocalDate localDate = rs.getDate("localDate").toLocalDate();
+
+        Move move = new Move(nodeID, longName, localDate);
+        moves.add(move);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return moves;
   }
 
   /** create a new instance of Move and Insert the new object into database */
