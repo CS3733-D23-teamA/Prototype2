@@ -24,30 +24,9 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
     this.NodeArray = new ArrayList<Node>();
   }
 
-  public static void createSchema() {
-    try {
-      Statement stmtSchema = nodeProvider.createConnection().createStatement();
-      String sqlCreateSchema = "CREATE SCHEMA IF NOT EXISTS \"Prototype2_schema\"";
-      stmtSchema.execute(sqlCreateSchema);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-  }
 
   // ResultSet
 
-  public static Connection createConnection() {
-    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
-    String user = "teama";
-    String password = "teama10";
-
-    try {
-      return DriverManager.getConnection(url, user, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
 
   public static ArrayList<Node> loadNodesFromCSV(String filePath) {
     ArrayList<Node> nodes = new ArrayList<>();
@@ -79,7 +58,6 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
   }
 
   public static ArrayList<Node> Import(String filePath) {
-    NodeDAOImp.createSchema();
     ArrayList<Node> NodeArray = loadNodesFromCSV(filePath);
 
     try {
@@ -101,8 +79,7 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            nodeProvider
-                .createConnection()
+            nodeProvider.createConnection()
                 .prepareStatement(
                     "INSERT INTO \"Prototype2_schema\".\"Node\" VALUES (?, ?, ?, ?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
@@ -185,8 +162,7 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
       String building = input.next();
 
       PreparedStatement ps =
-          nodeProvider
-              .createConnection()
+          nodeProvider.createConnection()
               .prepareStatement("INSERT INTO Prototype2_schema.\"Node\" VALUES (?, ?, ?, ?, ?)");
       ps.setInt(1, nodeID);
       ps.setInt(2, xcoord);
@@ -211,8 +187,7 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
       int nodeID = input.nextInt();
 
       PreparedStatement ps =
-          nodeProvider
-              .createConnection()
+          nodeProvider.createConnection()
               .prepareStatement("DELETE FROM Prototype2_schema.\"Node\" WHERE nodeID = ?");
       ps.setInt(1, nodeID);
       ps.executeUpdate();
@@ -237,8 +212,7 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
       String building = input.next();
 
       PreparedStatement ps =
-          nodeProvider
-              .createConnection()
+          nodeProvider.createConnection()
               .prepareStatement(
                   "UPDATE Prototype2_schema.\"Node\" SET xcoord = ?, ycoord = ?, floor = ?, building = ? WHERE nodeID = ?");
       ps.setInt(1, xcoord);

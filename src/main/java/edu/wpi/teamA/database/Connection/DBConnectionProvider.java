@@ -3,6 +3,7 @@ package edu.wpi.teamA.database.Connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBConnectionProvider {
   private static DBConnectionProvider instance = null;
@@ -28,4 +29,25 @@ public class DBConnectionProvider {
       return null;
     }
   }
+  public static void createSchema() {
+    try {
+      Statement stmtSchema = instance.createConnection().createStatement();
+      String sqlCreateSchema = "CREATE SCHEMA IF NOT EXISTS \"Prototype2_schema\"";
+      stmtSchema.execute(sqlCreateSchema);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  //close the connection and exit
+  public void closeConnection() {
+    try {
+      if (connection != null && !connection.isClosed()) {
+        connection.close();
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
 }
