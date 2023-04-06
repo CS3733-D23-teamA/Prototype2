@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DBConnectionProvider {
   private static DBConnectionProvider instance = null;
-  private Connection connection;
+  private static Connection connection;
 
   public static DBConnectionProvider getInstance() {
     if (instance == null) {
@@ -18,16 +18,23 @@ public class DBConnectionProvider {
   }
 
   public static Connection createConnection() {
-    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
-    String user = "teama";
-    String password = "teama10";
+    if (connection == null) {
 
-    try {
-      return DriverManager.getConnection(url, user, password);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
+      String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
+      String user = "teama";
+      String password = "teama10";
+
+      try {
+        Class.forName("org.postgresql.Driver");
+        connection = DriverManager.getConnection(url, user, password);
+      } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+      } catch (ClassNotFoundException e) {
+        throw new RuntimeException(e);
+      }
     }
+    return connection;
   }
 
   public static void createSchema() {

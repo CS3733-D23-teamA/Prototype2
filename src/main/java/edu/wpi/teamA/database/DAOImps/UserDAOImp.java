@@ -29,6 +29,7 @@ public class UserDAOImp {
               + "lastName   VARCHAR(255))";
       stmtUser.execute(sqlCreateUser);
     } catch (SQLException e) {
+      e.printStackTrace();
       throw new RuntimeException(e);
     }
   }
