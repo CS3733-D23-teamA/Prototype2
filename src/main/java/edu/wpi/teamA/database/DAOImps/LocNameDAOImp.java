@@ -20,17 +20,73 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     this.LocNameArray = LocNameArray;
   }
 
-  public static void Import(String filePath) {
+  public LocNameDAOImp() {
+    this.LocNameArray = new ArrayList<LocationName>();
+  }
+
+  public static void createSchema() {
+    try {
+      Statement stmtSchema = LocNameProvider.createConnection().createStatement();
+      String sqlCreateSchema = "CREATE SCHEMA IF NOT EXISTS \"Prototype2_schema\"";
+      stmtSchema.execute(sqlCreateSchema);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public static Connection createConnection() {
+    String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamadb";
+    String user = "teama";
+    String password = "teama10";
+
+    try {
+      return DriverManager.getConnection(url, user, password);
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public static ArrayList<LocationName> loadLocNamesFromCSV(String filePath) {
+    ArrayList<LocationName> locationNames = new ArrayList<>();
+
+    try {
+      BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
+      csvReader.readLine(); // Skip the header line
+      String row;
+
+      while ((row = csvReader.readLine()) != null) {
+        String[] data = row.split(",");
+
+        String longName = data[0];
+        String shortName = data[1];
+        String nodeType = data[2];
+        LocationName locationName = new LocationName(longName, shortName, nodeType);
+        locationNames.add(locationName);
+      }
+
+      csvReader.close();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    return locationNames;
+  }
+
+  public static ArrayList<LocationName> Import(String filePath) {
+    LocNameDAOImp.createSchema();
+    ArrayList<LocationName> LocNameArray = loadLocNamesFromCSV(filePath);
+
     try {
       BufferedReader csvReader = new BufferedReader(new FileReader(filePath));
       csvReader.readLine();
       String row;
 
       String sqlCreateEdge =
-          "Create Table if not exists Prototype2_schema.Node"
-              + "(LongName   Varchar(600),"
-              + "ShortName     Varchar(600),"
-              + "NodeType  Varchar(600))";
+          "Create Table if not exists \"Prototype2_schema\".\"LocationName\""
+              + "(longName     Varchar(600),"
+              + "shortName     Varchar(600),"
+              + "nodeType      Varchar(600))";
       Statement stmtLocName = LocNameProvider.createConnection().createStatement();
       stmtLocName.execute(sqlCreateEdge);
 
@@ -40,7 +96,7 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
         PreparedStatement ps =
             LocNameProvider.createConnection()
                 .prepareStatement(
-                    "INSERT INTO Prototype2_schema.\"LocationName\" VALUES (?, ?, ?)");
+                    "INSERT INTO \"Prototype2_schema\".\"LocationName\" VALUES (?, ?, ?)");
         ps.setString(1, data[0]);
         ps.setString(2, data[1]);
         ps.setString(3, data[2]);
@@ -51,12 +107,13 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
 
       throw new RuntimeException(e);
     }
+    return LocNameArray;
   }
 
   public static void Export(String filePath) {
     try {
       Statement st = LocNameProvider.createConnection().createStatement();
-      ResultSet rs = st.executeQuery("SELECT * FROM Prototype2_schema.\"LocationName\"");
+      ResultSet rs = st.executeQuery("SELECT * FROM \"Prototype2_schema\".\"LocationName\"");
 
       FileWriter csvWriter = new FileWriter("LocationName.csv");
       csvWriter.append("longName,shortName,nodeType\n");
@@ -75,6 +132,28 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     } catch (SQLException | IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public ArrayList<LocationName> loadLocNamefromDatabase() {
+    ArrayList<LocationName> locationNames = new ArrayList<>();
+
+    try {
+      Statement st = LocNameProvider.createConnection().createStatement();
+      ResultSet rs = st.executeQuery("SELECT * FROM \"Prototype2_schema\".\"LocationName\"");
+
+      while (rs.next()) {
+        String longName = rs.getString("longName");
+        String shortName = rs.getString("shortName");
+        String nodeType = rs.getString("nodeType");
+
+        LocationName locationName = new LocationName(longName, shortName, nodeType);
+        locationNames.add(locationName);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return locationNames;
   }
 
   @Override

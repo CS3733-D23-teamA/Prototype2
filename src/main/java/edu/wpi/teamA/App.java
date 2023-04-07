@@ -1,5 +1,6 @@
 package edu.wpi.teamA;
 
+import edu.wpi.teamA.database.DAOImps.UserDAOImp;
 import edu.wpi.teamA.navigation.Navigation;
 import edu.wpi.teamA.navigation.Screen;
 import java.io.IOException;
@@ -33,13 +34,14 @@ public class App extends Application {
 
     App.rootPane = root;
 
+    UserDAOImp un = new UserDAOImp();
+    un.createUserTable();
+
     final Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
 
-    Navigation.navigate(Screen.HOME);
-
-    // call all database DAOs and populate the list
+    Navigation.navigate(Screen.LOGIN);
   }
 
   @Override

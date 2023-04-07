@@ -4,7 +4,7 @@ import edu.wpi.teamA.database.DAOImps.NodeDAOImp;
 import edu.wpi.teamA.database.ORMclasses.Node;
 import edu.wpi.teamA.navigation.Navigation;
 import edu.wpi.teamA.navigation.Screen;
-import edu.wpi.teamA.pathfinding.BFS;
+import edu.wpi.teamA.pathfinding.AStar;
 import edu.wpi.teamA.pathfinding.SearchController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
@@ -28,7 +28,7 @@ public class PathfindingController implements IPageController {
     ArrayList<Node> nodeList = nodeDAO.loadNodesFromDatabase();
 
     for (Node node : nodeList) {
-      nodeOptions.add(node.nodeID);
+      nodeOptions.add(node.getNodeID());
     }
 
     startSelection.setItems(FXCollections.observableArrayList(nodeOptions));
@@ -42,10 +42,10 @@ public class PathfindingController implements IPageController {
 
   public void submit() {
     try {
-      BFS bfs = new BFS(startSelection.getSelectedItem(), endSelection.getSelectedItem());
-      directions.setText(bfs.toString());
+      AStar a = new AStar(startSelection.getSelectedItem(), endSelection.getSelectedItem());
+      directions.setText(a.toString());
       System.out.println("Nodes submitted");
-      System.out.println(bfs);
+      System.out.println(a);
     } catch (NullPointerException e) {
       System.out.println("Null Value");
     }
