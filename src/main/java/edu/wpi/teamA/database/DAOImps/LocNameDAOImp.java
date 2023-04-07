@@ -129,6 +129,7 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
       throw new RuntimeException(e);
     }
   }
+
   public ArrayList<LocationName> loadLocNamefromDatabase() {
     ArrayList<LocationName> locationNames = new ArrayList<>();
 
@@ -150,7 +151,6 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
 
     return locationNames;
   }
-
 
   @Override
   public void Add() {}

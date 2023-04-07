@@ -29,6 +29,7 @@ public class DBConnectionProvider {
       return null;
     }
   }
+
   public static void createSchema() {
     try {
       Statement stmtSchema = instance.createConnection().createStatement();
@@ -39,7 +40,7 @@ public class DBConnectionProvider {
     }
   }
 
-  //close the connection and exit
+  // close the connection and exit
   public void closeConnection() {
     try {
       if (connection != null && !connection.isClosed()) {
@@ -49,5 +50,4 @@ public class DBConnectionProvider {
       e.printStackTrace();
     }
   }
-
 }
