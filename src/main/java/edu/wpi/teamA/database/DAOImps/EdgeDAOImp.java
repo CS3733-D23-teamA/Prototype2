@@ -230,9 +230,7 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
       int newEndNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider
-              .createConnection()
-              .prepareStatement(
+          edgeProvider.createConnection().prepareStatement(
                   "UPDATE \"Prototype2_schema\".\"Edge\" SET startNode = ?, endNode = ? WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, newStartNode);
       ps.setInt(2, newEndNode);
