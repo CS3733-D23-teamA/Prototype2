@@ -187,8 +187,7 @@ public class NodeDAOImp implements IDataBase, INodeDAO {
       int nodeID = input.nextInt();
 
       PreparedStatement ps =
-          nodeProvider
-              .createConnection()
+          nodeProvider.createConnection()
               .prepareStatement("DELETE FROM Prototype2_schema.\"Node\" WHERE nodeID = ?");
       ps.setInt(1, nodeID);
       ps.executeUpdate();
