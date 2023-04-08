@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LocNameDAOImp implements IDataBase, ILocNameDAO {
 
@@ -156,12 +157,80 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     return locationNames;
   }
 
-  @Override
-  public void Add() {}
+  public void Add() {
+    try {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter longName, shortName, and nodeType:");
+      String longName = input.nextLine();
+      String shortName = input.nextLine();
+      String nodeType = input.nextLine();
+
+      PreparedStatement ps =
+              LocNameProvider.createConnection()
+                      .prepareStatement("INSERT INTO \"Prototype2_schema\".\"LocationName\" VALUES (?, ?, ?)");
+      ps.setString(1, longName);
+      ps.setString(2, shortName);
+      ps.setString(3, nodeType);
+      ps.executeUpdate();
+
+      LocNameArray.add(new LocationName(longName, shortName, nodeType));
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   @Override
-  public void Delete() {}
+  public void Delete() {
+    try {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter the longName of the LocationName to delete:");
+      String longName = input.nextLine();
+
+      PreparedStatement ps =
+              LocNameProvider.createConnection()
+                      .prepareStatement("DELETE FROM \"Prototype2_schema\".\"LocationName\" WHERE longName = ?");
+      ps.setString(1, longName);
+      ps.executeUpdate();
+
+      LocNameArray.removeIf(LocationName -> LocationName.getLongName().equals(longName));
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   @Override
-  public void Update() {}
+  public void Update() {
+    try {
+      Scanner input = new Scanner(System.in);
+      System.out.println("Enter old longName, new longName, new shortName, and new nodeType:");
+      String oldLongName = input.nextLine();
+      String newLongName = input.nextLine();
+      String newShortName = input.nextLine();
+      String newNodeType = input.nextLine();
+
+      PreparedStatement ps =
+              LocNameProvider.createConnection().prepareStatement(
+                      "UPDATE \"Prototype2_schema\".\"LocationName\" SET longName = ?, shortName = ?, nodeType = ? WHERE longName = ?");
+      ps.setString(1, newLongName);
+      ps.setString(2, newShortName);
+      ps.setString(3, newNodeType);
+      ps.setString(4, oldLongName);
+      ps.executeUpdate();
+
+      LocNameArray.forEach(
+              locationName -> {
+                if (locationName.getLongName().equals(oldLongName)) {
+                  locationName.setLongName(newLongName);
+                  locationName.setShortName(newShortName);
+                  locationName.setNodeType(newNodeType);
+                }
+              });
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
+
