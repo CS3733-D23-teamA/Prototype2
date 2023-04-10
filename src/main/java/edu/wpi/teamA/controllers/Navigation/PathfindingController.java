@@ -30,7 +30,7 @@ public class PathfindingController extends PageController {
 
   @FXML private ArrayList<Node> nodeList;
 
-  @FXML private Pane topPane;
+  @FXML private Pane topPane = new Pane();
 
   @FXML
   private StackPane sp =
@@ -77,7 +77,8 @@ public class PathfindingController extends PageController {
     for (int i = 1; i < nodePathIDs.size(); i++) {
       gNode = a.getGraphNode(nodePathIDs.get(i));
 
-      sp.getChildren()
+      topPane
+          .getChildren()
           .addAll(
               new Line(lastX, lastY, gNode.getXcoord(), gNode.getYcoord()),
               new Circle(gNode.getXcoord(), gNode.getYcoord(), 5, Color.ORANGE));
