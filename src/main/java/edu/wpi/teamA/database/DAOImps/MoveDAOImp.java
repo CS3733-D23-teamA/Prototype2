@@ -11,8 +11,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -89,7 +87,8 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            moveProvider.createConnection()
+            moveProvider
+                .createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setString(2, data[1]);
@@ -153,20 +152,15 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
   }
 
   /** create a new instance of Move and Insert the new object into database */
-  @Override
-  public void Add() {
+  public void Add(int nodeID, String longName, String dateString) {
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter nodeID, longName, and date (MM/dd/yyyy):");
-      int nodeID = input.nextInt();
-      String longName = input.next();
-      String dateString = input.next();
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
       LocalDate localDate = LocalDate.parse(dateString, formatter);
 
       PreparedStatement ps =
-              moveProvider.createConnection()
-                      .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
+          moveProvider
+              .createConnection()
+              .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Move\" VALUES (?, ?, ?)");
       ps.setInt(1, nodeID);
       ps.setString(2, longName);
       ps.setDate(3, java.sql.Date.valueOf(localDate));
@@ -179,15 +173,13 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     }
   }
 
-  @Override
-  public void Delete() {
+  public void Delete(int nodeID) {
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter the nodeID to delete:");
-      int nodeID = input.nextInt();
 
       PreparedStatement ps =
-              moveProvider.createConnection().prepareStatement("DELETE FROM \"Prototype2_schema\".\"Move\" WHERE nodeID = ?");
+          moveProvider
+              .createConnection()
+              .prepareStatement("DELETE FROM \"Prototype2_schema\".\"Move\" WHERE nodeID = ?");
       ps.setInt(1, nodeID);
       ps.executeUpdate();
 
@@ -198,32 +190,28 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
     }
   }
 
-  @Override
-  public void Update() {
+  public void Update(int nodeID, String longName, String dateString) {
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter nodeID, new longName, and new date (MM/dd/yyyy):");
-      int nodeID = input.nextInt();
-      String longName = input.next();
-      String dateString = input.next();
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
       LocalDate localDate = LocalDate.parse(dateString, formatter);
 
       PreparedStatement ps =
-              moveProvider.createConnection().prepareStatement(
-                              "UPDATE \"Prototype2_schema\".\"Move\" SET longName = ?, localDate = ? WHERE nodeID = ?");
+          moveProvider
+              .createConnection()
+              .prepareStatement(
+                  "UPDATE \"Prototype2_schema\".\"Move\" SET longName = ?, localDate = ? WHERE nodeID = ?");
       ps.setString(1, longName);
       ps.setDate(2, java.sql.Date.valueOf(localDate));
       ps.setInt(3, nodeID);
       ps.executeUpdate();
 
       MoveArray.forEach(
-              move -> {
-                if (move.getNodeID() == nodeID) {
-                  move.setLongName(longName);
-                  move.setDate(localDate);
-                }
-              });
+          move -> {
+            if (move.getNodeID() == nodeID) {
+              move.setLongName(longName);
+              move.setDate(localDate);
+            }
+          });
 
     } catch (SQLException e) {
       throw new RuntimeException(e);
@@ -235,8 +223,9 @@ public class MoveDAOImp implements IDataBase, IMoveDAO {
 
     try {
       PreparedStatement ps =
-              moveProvider.createConnection()
-                      .prepareStatement("SELECT * FROM \"Prototype2_schema\".\"Move\" WHERE nodeID = ?");
+          moveProvider
+              .createConnection()
+              .prepareStatement("SELECT * FROM \"Prototype2_schema\".\"Move\" WHERE nodeID = ?");
       ps.setInt(1, nodeID);
       ResultSet rs = ps.executeQuery();
 

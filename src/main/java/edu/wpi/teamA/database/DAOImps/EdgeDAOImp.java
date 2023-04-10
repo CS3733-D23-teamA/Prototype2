@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class EdgeDAOImp implements IDataBase, IEdgeDAO {
   ArrayList<Edge> EdgeArray;
@@ -92,7 +91,8 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
         String[] data = row.split(",");
 
         PreparedStatement ps =
-            edgeProvider.createConnection()
+            edgeProvider
+                .createConnection()
                 .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Edge\" VALUES (?, ?)");
         ps.setInt(1, Integer.parseInt(data[0]));
         ps.setInt(2, Integer.parseInt(data[1]));
@@ -152,17 +152,13 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
     return edges;
   }
 
-  @Override
-  public void Add() {
+  public void Add(int startNode, int endNode) {
     /** Insert new edge object to the existing edge table and the arraylist */
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter startNode and endNode:");
-      int startNode = input.nextInt();
-      int endNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider.createConnection()
+          edgeProvider
+              .createConnection()
               .prepareStatement("INSERT INTO \"Prototype2_schema\".\"Edge\" VALUES (?, ?)");
       ps.setInt(1, startNode);
       ps.setInt(2, endNode);
@@ -175,19 +171,15 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
     }
   }
 
-  @Override
-  public void Delete() {
+  public void Delete(int startNode, int endNode) {
     /**
      * delete the edge when specified with a composite key (startNode+endNode) and in the arrayList
      */
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter the startNode and endNode to delete:");
-      int startNode = input.nextInt();
-      int endNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider.createConnection()
+          edgeProvider
+              .createConnection()
               .prepareStatement(
                   "DELETE FROM \"Prototype2_schema\".\"Edge\" WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, startNode);
@@ -201,22 +193,17 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
     }
   }
 
-  @Override
-  public void Update() {
+  public void Update(int oldStartNode, int oldEndNode, int newStartNode, int newEndNode) {
     /**
      * update the edge startNode and endNode when specified with a composite key (startNode +
      * ednNode) and In the arrayList
      */
     try {
-      Scanner input = new Scanner(System.in);
-      System.out.println("Enter old startNode, old endNode, new startNode, and new endNode:");
-      int oldStartNode = input.nextInt();
-      int oldEndNode = input.nextInt();
-      int newStartNode = input.nextInt();
-      int newEndNode = input.nextInt();
 
       PreparedStatement ps =
-          edgeProvider.createConnection().prepareStatement(
+          edgeProvider
+              .createConnection()
+              .prepareStatement(
                   "UPDATE \"Prototype2_schema\".\"Edge\" SET startNode = ?, endNode = ? WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, newStartNode);
       ps.setInt(2, newEndNode);
@@ -241,8 +228,10 @@ public class EdgeDAOImp implements IDataBase, IEdgeDAO {
     Edge edge = null;
     try {
       PreparedStatement ps =
-              edgeProvider.createConnection()
-                      .prepareStatement("SELECT * FROM \"Prototype2_schema\".\"Edge\" WHERE startNode = ? AND endNode = ?");
+          edgeProvider
+              .createConnection()
+              .prepareStatement(
+                  "SELECT * FROM \"Prototype2_schema\".\"Edge\" WHERE startNode = ? AND endNode = ?");
       ps.setInt(1, startNode);
       ps.setInt(2, endNode);
       ResultSet rs = ps.executeQuery();
