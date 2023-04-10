@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -24,12 +23,12 @@ public class LoginController {
   @FXML
   public void initialize() {
     // Enter Key functionality
-//    loginButton.setOnKeyPressed(
-//        event -> {
-//          if (event.getCode().equals(KeyCode.ENTER)) {
-//            loginButton.onActionProperty();
-//          }
-//        });
+    //    loginButton.setOnKeyPressed(
+    //        event -> {
+    //          if (event.getCode().equals(KeyCode.ENTER)) {
+    //            loginButton.onActionProperty();
+    //          }
+    //        });
   }
 
   public void login() {

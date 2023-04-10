@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #012D5A;" styleClass="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.HomeController">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #012D5A;" styleClass="borderpane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.HomeController">
    <stylesheets>
       <URL value="@stylesheets/home.css" />
       <URL value="@stylesheets/main.css" />
@@ -25,8 +25,11 @@
                      <children>
                         <Text fill="#f1f1f1" layoutX="-452.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Brigham and Women’s Hospital!" textAlignment="CENTER" wrappingWidth="1604.1730346679688" x="290.0">
                            <font>
-                              <Font name="Open Sans Bold" size="32.0" />
+                              <Font name="Georgia Bold" size="32.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Text>
                      </children>
                   </AnchorPane>
@@ -36,10 +39,6 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="1600.0" style="-fx-background-color: bblue;" BorderPane.alignment="CENTER">
-         <children>
-            <fx:include fx:id="header" prefHeight="100.0" prefWidth="1600.0" source="NavigationBar.fxml" BorderPane.alignment="TOP_CENTER" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
+      <fx:include fx:id="navbar" prefHeight="100.0" prefWidth="1600.0" source="NavigationBar.fxml" BorderPane.alignment="TOP_CENTER" />
    </top>
 </BorderPane>

@@ -26,7 +26,7 @@
                   </ImageView>
                </children>
                <HBox.margin>
-                  <Insets left="10.0" right="5.0" />
+                  <Insets left="15.0" />
                </HBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="985.0" spacing="30.0" HBox.hgrow="ALWAYS">
@@ -58,7 +58,7 @@
                   <Circle fill="#f1f1f1" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
                <HBox.margin>
-                  <Insets left="5.0" right="10.0" />
+                  <Insets right="20.0" />
                </HBox.margin>
             </HBox>
          </children>

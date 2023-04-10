@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.LoginController">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@stylesheets/main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.LoginController">
    <center>
       <HBox prefHeight="750.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="900.0" prefWidth="626.0" spacing="40.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label prefHeight="60.0" prefWidth="601.0" style="-fx-text-fill: #012D5A;" text="Welcome to Brigham Womens Hospital">
+                  <Label fx:id="title" prefHeight="60.0" prefWidth="601.0" style="-fx-text-fill: #012D5A; -fx-alignment: center;" text="Welcome" textAlignment="CENTER">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                   <Label fx:id="loginMessageLabel" style="-fx-text-fill: red;" />
@@ -68,7 +68,7 @@
                   </VBox>
                </children>
             </VBox>
-            <ImageView fitHeight="900.0" fitWidth="931.0" opacity="0.5" pickOnBounds="true" HBox.hgrow="ALWAYS">
+            <ImageView fitHeight="900.0" fitWidth="800.0" opacity="0.5" pickOnBounds="true" HBox.hgrow="ALWAYS">
                <image>
                   <Image url="@../images/home-page/bwh-outside.jpg" />
                </image>
