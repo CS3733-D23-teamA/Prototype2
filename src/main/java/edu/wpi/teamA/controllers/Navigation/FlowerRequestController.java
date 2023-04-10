@@ -11,7 +11,7 @@ import java.sql.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 
-public class FlowerRequestController implements IPageController, IServiceController {
+public class FlowerRequestController extends PageController implements IServiceController {
   @FXML MFXButton submitButton;
   @FXML MFXTextField nameField;
   @FXML MFXTextField roomField;

@@ -1,0 +1,58 @@
+.root{
+    -fx-font-family: "Open Sans";
+    -fx-text-fill: bblue;
+    -fx-background-color: #F1F1F1;
+    bwhite:  #F1F1F1;
+    bblue:  #012D5A;
+    bblack:  #151515;
+    blightblue: #98AABC;
+}
+
+.borderpane{
+    -fx-pref-height: 100;
+    -fx-pref-width: 1280;
+    -fx-max-height: 125;
+    -fx-max-width: 1600;
+    -fx-scale-shape: true;
+}
+
+
+.text{
+    -fx-text-fill: bblue;
+    -fx-font-size: 20;
+}
+
+styled.button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 50px;
+    -fx-wrap-text: true;
+
+    -fx-background-color: bwhite;
+    -fx-background-radius: 10;
+}
+
+styled.button:hover {
+    -fx-underline: true;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: bblack;
+    -fx-border-radius: 10px;
+}
+
+styled.button:pressed {
+    -fx-background-color: bblue;
+    -fx-text-fill: bwhite;
+}
+
+.label{
+    -fx-font-size: 100;
+    -fx-font-weight: 10;
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: bwhite;
+}
+
+#title {
+    -fx-font-size: 80;
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: bwhite;
+}

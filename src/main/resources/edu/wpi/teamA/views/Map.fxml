@@ -18,8 +18,7 @@
     <content>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1440.0" prefWidth="1280.0">
             <children>
-                <fx:include fx:id="header" source="Header.fxml" />
-                <fx:include fx:id="footer" layoutY="1340.0" source="Footer.fxml" />
+                <fx:include fx:id="header" source="NavigationBar.fxml" />
                 <Text fx:id="title" fill="#eebd28" layoutY="-32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Map Editor" textAlignment="CENTER" wrappingWidth="700.0" x="290.0" y="100.0">
                     <font>
                         <Font name="Open Sans Bold" size="48.0" />
