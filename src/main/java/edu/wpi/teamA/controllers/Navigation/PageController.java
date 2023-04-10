@@ -6,7 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
 public class PageController {
-  @FXML MFXButton backButton = new MFXButton();
+  @FXML MFXButton backButton;
 
   @FXML
   public void initialize() {}
