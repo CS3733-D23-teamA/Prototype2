@@ -12,6 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -58,19 +61,28 @@ public class PathfindingController extends PageController {
 
     } catch (NullPointerException e) {
       System.out.println("Null Value");
-      //System.out.println(pr);
+      // System.out.println(pr);
     }
   }
 
   public void drawPath(AStar a) {
     ArrayList<Integer> nodePathIDs = a.getPath();
 
-    for (Integer i: nodePathIDs) {
-      GraphNode gNode = a.getGraphNode(i);
+    GraphNode gNode = a.getGraphNode(nodePathIDs.get(0));
 
+    int lastX = gNode.getXcoord();
+    int lastY = gNode.getYcoord();
+
+    topPane.getChildren().add(new Circle(lastX, lastY, 5, Color.ORANGE));
+    for (int i = 1; i < nodePathIDs.size(); i++) {
+      gNode = a.getGraphNode(nodePathIDs.get(i));
+
+      sp.getChildren()
+          .addAll(
+              new Line(lastX, lastY, gNode.getXcoord(), gNode.getYcoord()),
+              new Circle(gNode.getXcoord(), gNode.getYcoord(), 5, Color.ORANGE));
+      lastX = gNode.getXcoord();
+      lastY = gNode.getYcoord();
     }
-
-
-
   }
 }
