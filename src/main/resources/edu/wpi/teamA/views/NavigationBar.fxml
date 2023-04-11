@@ -35,10 +35,10 @@
                <children>
                   <MenuButton fx:id="serviceRequestsButton" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="10.0" mnemonicParsing="false" styleClass="menubutton" text="Service Requests" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                      <items>
-                        <MenuItem fx:id="flowerMenu" mnemonicParsing="false" onAction="#flowerMenu" text="Flower Delivery" />
-                        <MenuItem fx:id="roomMenu" mnemonicParsing="false" onAction="#roomMenu" text="Conference Room Request   " />
-                        <MenuItem fx:id="otherMenu" mnemonicParsing="false" text="Other" />
-                        <MenuItem fx:id="otherMenu1" mnemonicParsing="false" text="My Requests" />
+                        <MenuItem fx:id="flowerMenu" mnemonicParsing="false" onAction="#openFlowerRequest" text="Flower Delivery" />
+                        <MenuItem fx:id="roomMenu" mnemonicParsing="false" onAction="#openRoomRequest" text="Conference Room Request   " />
+                        <MenuItem fx:id="otherMenu" mnemonicParsing="false" onAction="#openOtherRequest" text="Other" />
+                        <MenuItem fx:id="myRequestsMenu" mnemonicParsing="false" onAction="#openMyRequests" text="My Requests" />
                      </items>
                   </MenuButton>
                   <MFXButton fx:id="mapEditorButton" rippleBackgroundOpacity="10.0" style="-fx-background-color: #98AABC; -fx-text-fill: #012D5A;" styleClass="menubutton" text="Map Editor" textAlignment="CENTER" HBox.hgrow="ALWAYS">
