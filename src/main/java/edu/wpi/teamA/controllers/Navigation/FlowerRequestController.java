@@ -11,7 +11,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 
