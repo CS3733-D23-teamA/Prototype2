@@ -52,9 +52,12 @@ public class PathfindingController extends PageController {
 
   public void submit() {
     try {
+      clearPane();
+
       AStar a = new AStar(startSelection.getSelectedItem(), endSelection.getSelectedItem());
 
       directions.setText(a.toString());
+      directions.setFill(Color.BLACK);
       System.out.println("Nodes submitted");
 
       drawPath(a);
@@ -63,6 +66,11 @@ public class PathfindingController extends PageController {
       System.out.println("Null Value");
       // System.out.println(pr);
     }
+  }
+
+  private void clearPane() {
+    sp.getChildren().remove(topPane);
+    sp.getChildren().add(topPane);
   }
 
   public void drawPath(AStar a) {
@@ -75,22 +83,18 @@ public class PathfindingController extends PageController {
 
     Line line;
 
-    topPane
-        .getChildren()
-        .add(new Circle(lastX, lastY, 3, Color.color(0.00392156862, 0.17647058823, 0.35294117647)));
+    topPane.getChildren().add(new Circle(lastX, lastY, 3, Color.DARKRED));
+
     for (int i = 1; i < nodePathIDs.size(); i++) {
       gNode = a.getGraphNode(nodePathIDs.get(i));
+
       line = new Line(lastX, lastY, gNode.getXcoord(), gNode.getYcoord());
-      line.setFill(Color.color(0.00392156862, 0.17647058823, 0.35294117647));
+      line.setFill(Color.DARKRED);
+      line.setStrokeWidth(8);
+
       topPane
           .getChildren()
-          .addAll(
-              line,
-              new Circle(
-                  gNode.getXcoord(),
-                  gNode.getYcoord(),
-                  3,
-                  Color.color(0.00392156862, 0.17647058823, 0.35294117647)));
+          .addAll(line, new Circle(gNode.getXcoord(), gNode.getYcoord(), 6, Color.DARKRED));
       lastX = gNode.getXcoord();
       lastY = gNode.getYcoord();
     }

@@ -4,7 +4,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -16,91 +15,40 @@
 <?import javafx.scene.text.Text?>
 <?import net.kurobako.gesturefx.GesturePane?>
 
-<BorderPane prefHeight="1600.0" prefWidth="1600.0" stylesheets="@stylesheets/main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.PathfindingController">
+<BorderPane maxWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@stylesheets/main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamA.controllers.Navigation.PathfindingController">
    <top>
         <fx:include fx:id="navbar" source="NavigationBar.fxml" BorderPane.alignment="TOP_CENTER" />
    </top>
    <center>
-      <ScrollPane prefHeight="1600.0" prefWidth="1600.0" BorderPane.alignment="TOP_CENTER">
-         <content>
-            <StackPane maxWidth="1600.0" minHeight="1900.0">
+      <StackPane alignment="TOP_CENTER" maxWidth="1600.0" prefHeight="900" prefWidth="1600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="800.0" prefWidth="1600.0" StackPane.alignment="CENTER">
                <children>
-                  <HBox maxWidth="1600.0">
+                  <VBox maxWidth="600.0" spacing="50.0">
                      <children>
-                        <MFXButton id="back" fx:id="backButton" onAction="#back" prefHeight="53.0" prefWidth="89.0" style="-fx-background-color: #0E5DAD; -fx-background-radius: 15; -fx-text-fill: WHITE;" text="Back" textAlignment="CENTER" textFill="#fcfcfc">
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
-                            <font>
-                                <Font name="Open Sans Bold" size="24.0" />
-                            </font>
-                            <rippleColor>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </rippleColor>
-                        </MFXButton>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
-                  <VBox alignment="TOP_CENTER" maxWidth="1600.0" prefHeight="2447.0" prefWidth="1584.0" StackPane.alignment="TOP_CENTER">
-                     <children>
-                        <HBox alignment="CENTER" depthTest="DISABLE" maxHeight="100.0" minWidth="1600.0" pickOnBounds="false" prefHeight="100.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                        <HBox alignment="BOTTOM_LEFT" fillHeight="false" maxWidth="300.0" spacing="20.0">
                            <children>
-                              <VBox prefHeight="100.0" prefWidth="196.0">
+                              <VBox fillWidth="false" maxWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start (Node)" wrappingWidth="125.55863594846761">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" top="10.0" />
-                                       </VBox.margin>
                                     </Text>
                                     <MFXFilterComboBox fx:id="startSelection" prefHeight="44.0" prefWidth="207.0">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </MFXFilterComboBox>
-                                 </children>
-                                 <padding>
-                                    <Insets right="5.0" />
-                                 </padding>
-                              </VBox>
-                              <VBox prefHeight="100.0" prefWidth="209.0" style="-fx-effect: 012D5A;">
-                                 <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End (Node)" wrappingWidth="125.55863594846761">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" top="10.0" />
-                                       </VBox.margin>
                                     </Text>
-                                    <MFXFilterComboBox fx:id="endSelection" prefHeight="44.0" prefWidth="207.0">
-                                       <VBox.margin>
-                                          <Insets left="10.0" />
-                                       </VBox.margin>
-                                    </MFXFilterComboBox>
+                                    <MFXFilterComboBox fx:id="endSelection" prefHeight="44.0" prefWidth="207.0" />
                                  </children>
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
                               </VBox>
-                              <MFXButton id="back" fx:id="submitButton" onAction="#submit" prefHeight="47.0" prefWidth="97.0" style="-fx-background-color: #0E5DAD; -fx-background-radius: 15; -fx-text-fill: WHITE;" text="Submit" textAlignment="CENTER" textFill="#fcfcfc">
+                              <MFXButton id="back" fx:id="submitButton" onAction="#submit" prefHeight="47.0" prefWidth="97.0" style="-fx-background-color: #0E5DAD; -fx-background-radius: 15; -fx-text-fill: WHITE;" text="Submit" textAlignment="CENTER" textFill="#fcfcfc" HBox.hgrow="ALWAYS">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -123,41 +71,47 @@
                                        </stops>
                                     </LinearGradient>
                                  </rippleColor>
-                                 <HBox.margin>
-                                    <Insets left="35.0" top="45.0" />
-                                 </HBox.margin>
                               </MFXButton>
                            </children>
-                           <padding>
-                              <Insets top="100.0" />
-                           </padding>
                         </HBox>
-                        <VBox maxHeight="200.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                        <VBox maxWidth="500.0">
                            <children>
                               <Label prefHeight="36.0" prefWidth="182.0" style="-fx-text-fill: #012D5A;" text="Directions:">
                                  <font>
                                     <Font name="Open Sans Regular" size="24.0" />
                                  </font>
                               </Label>
-                              <Text fx:id="directions" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter starting and ending destination ...&#10;" wrappingWidth="1150.0" />
-                           </children>
-                           <padding>
-                              <Insets left="100.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="1200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <GesturePane fx:id="gp" prefHeight="500.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                              <Text fx:id="directions" fill="#8d8989" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter starting and ending destination ...&#10;" wrappingWidth="500.0" />
                            </children>
                         </VBox>
                      </children>
                      <padding>
-                        <Insets bottom="100.0" left="100.0" right="100.0" />
+                        <Insets left="100.0" right="100.0" top="100.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="800.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="45.0" prefWidth="255.0" style="-fx-text-fill: #012D5A;" text="Map Directions:">
+                           <font>
+                              <Font name="Open Sans Regular" size="24.0" />
+                           </font>
+                        </Label>
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <GesturePane fx:id="gp" prefHeight="100.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="20.0" />
                      </padding>
                   </VBox>
                </children>
-            </StackPane>
-         </content>
-      </ScrollPane>
+            </HBox>
+         </children>
+      </StackPane>
    </center>
 </BorderPane>

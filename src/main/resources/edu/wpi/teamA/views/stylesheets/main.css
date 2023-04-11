@@ -48,6 +48,14 @@ styled.button:pressed {
     -fx-text-alignment: center;
 }
 
+.vbox {
+    -fx-max-width: 1600;
+}
+
+.hbox {
+    -fx-max-width: 1600;
+}
+
 #title {
     -fx-font-size: 48;
     -fx-font-family: "Georgia";
