@@ -1,6 +1,8 @@
 package edu.wpi.teamA.controllers.Navigation;
 
+import edu.wpi.teamA.database.DAOImps.CRRRDAOImp;
 import edu.wpi.teamA.database.DAOImps.FlowerDAOImpl;
+import edu.wpi.teamA.database.ORMclasses.ConferenceRoomResRequest;
 import edu.wpi.teamA.database.ORMclasses.FlowerEntity;
 import edu.wpi.teamA.navigation.Navigation;
 import edu.wpi.teamA.navigation.Screen;
@@ -17,14 +19,24 @@ public class ServiceRequestController extends PageController {
   @FXML private TableView<FlowerEntity> flowerTable;
   @FXML private TableColumn<FlowerEntity, String> roomCol;
   @FXML private TableColumn<FlowerEntity, String> dateCol;
-  @FXML private TableColumn<FlowerEntity, String> timeCol;
+  @FXML private TableColumn<FlowerEntity, Integer> timeCol;
   @FXML private TableColumn<FlowerEntity, String> flowerCol;
   @FXML private TableColumn<FlowerEntity, String> commentCol;
   @FXML private TableColumn<FlowerEntity, String> statusCol;
 
+  private CRRRDAOImp cdao = new CRRRDAOImp();
+  @FXML private TableView<ConferenceRoomResRequest> roomTable;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> roomCol1;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> dateCol1;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> startCol;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> endCol;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> commentCol1;
+  @FXML private TableColumn<ConferenceRoomResRequest, String> statusCol1;
+
   @FXML
   public void initialize() {
     displayFlowerRequests(fdao.getAllFlowers());
+    displayRoomRequests(cdao.getAllCRRR());
   }
 
   public void displayFlowerRequests(List<FlowerEntity> flowerEntityArrayList) {
@@ -37,6 +49,18 @@ public class ServiceRequestController extends PageController {
 
     flowerTable.setItems(FXCollections.observableArrayList(flowerEntityArrayList));
     flowerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+  }
+
+  public void displayRoomRequests(List<ConferenceRoomResRequest> CRRRArrayList) {
+    roomCol1.setCellValueFactory(new PropertyValueFactory<>("room"));
+    dateCol1.setCellValueFactory(new PropertyValueFactory<>("date"));
+    startCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+    endCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+    commentCol1.setCellValueFactory(new PropertyValueFactory<>("comment"));
+    statusCol1.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+    roomTable.setItems(FXCollections.observableArrayList(CRRRArrayList));
+    roomTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
   }
 
   public void flowerMenu() {
