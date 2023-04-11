@@ -48,10 +48,10 @@ public class LoginController {
     User user =
         checker.checkUser(username, password); // Make a user object to send to Home Page controller
     User wrongPassword = new User(2, "N", "N", "N", "N"); // creates no existing user object
-    if (user != null) { //checks if a user was returned by check user (the username exists)
-      if (user.equals(wrongPassword)) { //checks if returned user is the wrong password user
+    if (user != null) { // checks if a user was returned by check user (the username exists)
+      if (user.equals(wrongPassword)) { // checks if returned user is the wrong password user
         loginMessageLabel.setText("Your password is incorrect.");
-      } else if (user.getAdminYes() //else because it returned a user the password was correct
+      } else if (user.getAdminYes() // else because it returned a user the password was correct
           == 1) { // checks if user is an admin, if so, do following commands
         Navigation.navigate(Screen.HOME);
       } else { // actions to be made if user is not an admin
