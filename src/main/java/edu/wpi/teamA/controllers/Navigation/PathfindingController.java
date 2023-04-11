@@ -73,15 +73,24 @@ public class PathfindingController extends PageController {
     int lastX = gNode.getXcoord();
     int lastY = gNode.getYcoord();
 
-    topPane.getChildren().add(new Circle(lastX, lastY, 5, Color.ORANGE));
+    Line line;
+
+    topPane
+        .getChildren()
+        .add(new Circle(lastX, lastY, 3, Color.color(0.00392156862, 0.17647058823, 0.35294117647)));
     for (int i = 1; i < nodePathIDs.size(); i++) {
       gNode = a.getGraphNode(nodePathIDs.get(i));
-
+      line = new Line(lastX, lastY, gNode.getXcoord(), gNode.getYcoord());
+      line.setFill(Color.color(0.00392156862, 0.17647058823, 0.35294117647));
       topPane
           .getChildren()
           .addAll(
-              new Line(lastX, lastY, gNode.getXcoord(), gNode.getYcoord()),
-              new Circle(gNode.getXcoord(), gNode.getYcoord(), 5, Color.ORANGE));
+              line,
+              new Circle(
+                  gNode.getXcoord(),
+                  gNode.getYcoord(),
+                  3,
+                  Color.color(0.00392156862, 0.17647058823, 0.35294117647)));
       lastX = gNode.getXcoord();
       lastY = gNode.getYcoord();
     }
