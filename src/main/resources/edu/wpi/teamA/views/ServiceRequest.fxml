@@ -96,12 +96,12 @@
                                     <Font size="34.0" />
                                  </font>
                               </Text>
-                              <TableView fx:id="flowerTable1" prefHeight="313.0" prefWidth="1564.0" GridPane.rowIndex="3">
+                              <TableView fx:id="roomTable" prefHeight="313.0" prefWidth="1564.0" GridPane.rowIndex="3">
                                  <columns>
                                     <TableColumn fx:id="roomCol1" prefWidth="129.1107406616211" text="Room" />
                                     <TableColumn fx:id="dateCol1" prefWidth="167.4798126220703" text="Date" />
-                                    <TableColumn fx:id="timeCol1" prefWidth="182.11627197265625" text="Start Time" />
-                                    <TableColumn fx:id="flowerCol1" prefWidth="217.38381958007812" text="End Time" />
+                                    <TableColumn fx:id="startCol" prefWidth="182.11627197265625" text="Start Time" />
+                                    <TableColumn fx:id="endCol" prefWidth="217.38381958007812" text="End Time" />
                                     <TableColumn fx:id="commentCol1" prefWidth="360.85418701171875" text="Comment" />
                                     <TableColumn minWidth="0.0" prefWidth="68.3892822265625" />
                                     <TableColumn fx:id="statusCol1" prefWidth="141.6795654296875" text="Status" />
