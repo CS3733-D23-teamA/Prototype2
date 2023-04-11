@@ -38,12 +38,4 @@ public class ServiceRequestController extends PageController {
     flowerTable.setItems(FXCollections.observableArrayList(flowerEntityArrayList));
     flowerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
   }
-
-  public void flowerMenu() {
-    Navigation.navigate(Screen.FLOWER_REQUEST);
-  }
-
-  public void roomMenu() {
-    Navigation.navigate(Screen.CONFERENCE_REQUEST);
-  }
 }
