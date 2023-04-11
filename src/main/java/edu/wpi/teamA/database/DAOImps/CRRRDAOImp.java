@@ -3,11 +3,9 @@ package edu.wpi.teamA.database.DAOImps;
 import edu.wpi.teamA.database.Connection.DBConnectionProvider;
 import edu.wpi.teamA.database.Interfaces.ICRRRDAO;
 import edu.wpi.teamA.database.ORMclasses.ConferenceRoomResRequest;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CRRRDAOImp implements ICRRRDAO {
   ArrayList<ConferenceRoomResRequest> crrrArray;
@@ -82,7 +80,44 @@ public class CRRRDAOImp implements ICRRRDAO {
     }
   }
 
-  public void updateCRRR(ConferenceRoomResRequest crrr) {}
+  @Override
+  public List<ConferenceRoomResRequest> getAllCRRR() {
+    ArrayList<ConferenceRoomResRequest> tempList = new ArrayList<>();
+    try {
+      Statement stmt = crrrProvider.createConnection().createStatement();
+      ResultSet rs =
+          stmt.executeQuery("SELECT * FROM \"Prototype2_schema\".\"ConferenceRoomRequest\"");
 
-  public void editCRRR(ConferenceRoomResRequest crrr) {}
+      while (rs.next()) {
+        String namee = rs.getString("name");
+        String room = rs.getString("room");
+        Date date = rs.getDate("date");
+        int startTime = rs.getInt("starttime");
+        int endTime = rs.getInt("endtime");
+        String comment = rs.getString("comment");
+        String status = rs.getString("status");
+
+        ConferenceRoomResRequest temp = new ConferenceRoomResRequest();
+        temp.setName(namee);
+        temp.setRoom(room);
+        temp.setDate(date);
+        temp.setStartTime(startTime);
+        temp.setEndTime(endTime);
+        temp.setComment(comment);
+        temp.setStatus(status);
+
+        tempList.add(temp);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return tempList;
+  }
+
+  @Override
+  public ConferenceRoomResRequest getCRRR(String name) {
+    return null;
+  }
+
+  public void updateCRRR(ConferenceRoomResRequest crrr) {}
 }

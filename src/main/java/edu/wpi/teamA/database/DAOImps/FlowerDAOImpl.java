@@ -183,7 +183,4 @@ public class FlowerDAOImpl implements IFlowerDAO {
       throw new RuntimeException(e);
     }
   }
-
-  @Override
-  public void editFlower(FlowerEntity flower, int field) {}
 }

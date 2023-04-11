@@ -23,4 +23,14 @@ public class ConferenceRoomResRequest {
     this.comment = f;
     this.status = "new";
   }
+
+  public ConferenceRoomResRequest() {
+    this.name = null;
+    this.room = null;
+    this.date = null;
+    this.startTime = 0;
+    this.endTime = 0;
+    this.comment = null;
+    this.status = "new";
+  }
 }
