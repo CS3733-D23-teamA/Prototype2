@@ -38,7 +38,6 @@ public class UserDAOImp {
   // Check if the user exists. If exists, pull the password from the database and check if it fits
   // If not exist, call addUser
   public User checkUser(String userName, String password) {
-    ArrayList<String> returnList = new ArrayList<>();
     try {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
@@ -58,7 +57,8 @@ public class UserDAOImp {
                   rs.getString("lastName"));
           return returnUser;
         } else {
-          return null;
+          User returnNoUser = new User(2, "N", "N", "N", "N");
+          return returnNoUser;
         }
       } else {
         System.out.println("User not found, add new user.");

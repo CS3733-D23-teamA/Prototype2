@@ -22,4 +22,19 @@ public class User {
     this.firstName = firstName;
     this.lastName = lastName;
   }
+
+  public boolean equals(User user2) { // .equals override to compare two users
+    if (this.adminYes == user2.adminYes) {
+      if (this.userName == user2.userName) {
+        if (this.password == user2.password) {
+          if (this.firstName == user2.firstName) {
+            if (this.lastName == user2.lastName) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
 }
