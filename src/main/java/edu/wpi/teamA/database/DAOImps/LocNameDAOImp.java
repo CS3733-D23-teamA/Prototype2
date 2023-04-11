@@ -238,4 +238,25 @@ public class LocNameDAOImp implements IDataBase, ILocNameDAO {
     }
     return locationName;
   }
+
+  public ArrayList<String> filterLocType(String type) {
+    ArrayList<String> lnList = new ArrayList<>();
+    try {
+      PreparedStatement ps =
+          LocNameProvider.createConnection()
+              .prepareStatement(
+                  "SELECT * FROM \"Prototype2_schema\".\"LocationName\" WHERE nodetype = ?");
+      ps.setString(1, type);
+      ResultSet rs = ps.executeQuery();
+
+      while (rs.next()) {
+        String n = rs.getString("longname");
+        lnList.add(n);
+      }
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return lnList;
+  }
 }

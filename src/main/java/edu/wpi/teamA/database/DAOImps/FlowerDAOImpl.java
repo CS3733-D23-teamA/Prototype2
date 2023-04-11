@@ -24,7 +24,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
     /** Insert new node object to the existing node table */
     try {
       String name = flower.getName();
-      int room = flower.getRoom();
+      String room = flower.getRoom();
       Date date = flower.getDate();
       int time = flower.getTime();
       String type = flower.getFlowerType();
@@ -34,7 +34,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
       String sqlCreateEdge =
           "Create Table if not exists \"Prototype2_schema\".\"Flower\""
               + "(namee    Varchar(600),"
-              + "room    int,"
+              + "room    VarChar(600),"
               + "datee    date,"
               + "timee     int,"
               + "flowerType     Varchar(600),"
@@ -49,7 +49,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
               .prepareStatement(
                   "INSERT INTO \"Prototype2_schema\".\"Flower\" VALUES (?, ?, ?, ?, ?, ?, ?)");
       ps.setString(1, name);
-      ps.setInt(2, room);
+      ps.setString(2, room);
       ps.setDate(3, date);
       ps.setInt(4, time);
       ps.setString(5, type);
@@ -91,7 +91,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
 
       while (rs.next()) {
         String namee = rs.getString("namee");
-        int room = rs.getInt("room");
+        String room = rs.getString("room");
         Date date = rs.getDate("datee");
         int time = rs.getInt("timee");
         String flowerType = rs.getString("flowertype");
@@ -126,7 +126,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
         String idk = rs.getString("namee");
-        int room = rs.getInt("room");
+        String room = rs.getString("room");
         Date date = rs.getDate("datee");
         int time = rs.getInt("timee");
         String flowerType = rs.getString("flowertype");
@@ -149,7 +149,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
   @Override
   public void updateFlower(FlowerEntity flower) {
     try {
-      int room = flower.getRoom();
+      String room = flower.getRoom();
       Date date = flower.getDate();
       int time = flower.getTime();
       String type = flower.getFlowerType();
@@ -161,7 +161,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
               .createConnection()
               .prepareStatement(
                   "UPDATE Prototype2_schema.\"Flower\" SET room = ?, datee = ?, timee = ?, flowerType = ?, comment = ?, status = ? WHERE namee = ?");
-      ps.setInt(1, room);
+      ps.setString(1, room);
       ps.setDate(2, date);
       ps.setInt(3, time);
       ps.setString(4, type);

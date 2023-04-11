@@ -44,6 +44,6 @@ public class ServiceRequestController extends PageController {
   }
 
   public void roomMenu() {
-    Navigation.navigate(Screen.FLOWER_REQUEST);
+    Navigation.navigate(Screen.CONFERENCE_REQUEST);
   }
 }
