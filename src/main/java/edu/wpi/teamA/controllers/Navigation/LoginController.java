@@ -1,6 +1,7 @@
 package edu.wpi.teamA.controllers.Navigation;
 
 import edu.wpi.teamA.database.DAOImps.UserDAOImp;
+import edu.wpi.teamA.database.ORMclasses.User;
 import edu.wpi.teamA.navigation.Navigation;
 import edu.wpi.teamA.navigation.Screen;
 import javafx.fxml.FXML;
@@ -38,7 +39,8 @@ public class LoginController {
     } else if (password.isBlank() == true) {
       loginMessageLabel.setText("Please enter password");
     } else {
-      if (checker.checkUser(username, password).size() >= 1) {
+      User user = checker.checkUser(username, password);
+      if (user != null) {
         Navigation.navigate(Screen.HOME);
       }
       loginMessageLabel.setText("Your username or password is incorrect.");

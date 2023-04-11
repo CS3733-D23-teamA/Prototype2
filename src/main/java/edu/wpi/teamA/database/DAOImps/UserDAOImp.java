@@ -22,7 +22,7 @@ public class UserDAOImp {
     try {
       Statement stmtUser = UserLoginProvider.createConnection().createStatement();
       String sqlCreateUser =
-          "CREATE TABLE IF NOT EXISTS \"Prototype2_schema\".\"Users\" ("
+          "CREATE TABLE IF NOT EXISTS \"teamadb\".\"Users\" ("
               + "adminYes   int,"
               + "userName   VARCHAR(255) PRIMARY KEY,"
               + "password   VARCHAR(255),"
@@ -37,22 +37,26 @@ public class UserDAOImp {
 
   // Check if the user exists. If exists, pull the password from the database and check if it fits
   // If not exist, call addUser
-  public ArrayList<String> checkUser(String userName, String password) {
+  public User checkUser(String userName, String password) {
     ArrayList<String> returnList = new ArrayList<>();
     try {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
-              .prepareStatement("SELECT * FROM \"Prototype2_schema\".\"Users\" WHERE userName = ?");
+              .prepareStatement("SELECT * FROM \"teamadb\".\"Users\" WHERE userName = ?");
       ps.setString(1, userName);
       ResultSet rs = ps.executeQuery();
 
       if (rs.next()) {
         String storedPassword = rs.getString("password");
         if (password.equals(storedPassword)) {
-          returnList.add(Integer.toString(rs.getInt("adminYes")));
-          returnList.add(rs.getString("firstName"));
-          returnList.add(rs.getString("lastName"));
-          return returnList;
+          User returnUser =
+              new User(
+                  rs.getInt("adminYes"),
+                  rs.getString("userName"),
+                  rs.getString("password"),
+                  rs.getString("firstName"),
+                  rs.getString("lastName"));
+          return returnUser;
         } else {
           return null;
         }
@@ -74,7 +78,7 @@ public class UserDAOImp {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
               .prepareStatement(
-                  "INSERT INTO \"Prototype2_schema\".\"Users\" (adminYes, userName, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
+                  "INSERT INTO \"teamadb\".\"Users\" (adminYes, userName, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
       ps.setInt(1, adminYes);
       ps.setString(2, userName);
       ps.setString(3, password);
