@@ -23,6 +23,7 @@ public class UserDAOImp {
       Statement stmtUser = UserLoginProvider.createConnection().createStatement();
       String sqlCreateUser =
           "CREATE TABLE IF NOT EXISTS \"Prototype2_schema\".\"Users\" ("
+              + "adminYes   int,"
               + "userName   VARCHAR(255) PRIMARY KEY,"
               + "password   VARCHAR(255),"
               + "firstName  VARCHAR(255),"
@@ -36,7 +37,8 @@ public class UserDAOImp {
 
   // Check if the user exists. If exists, pull the password from the database and check if it fits
   // If not exist, call addUser
-  public boolean checkUser(String userName, String password) {
+  public ArrayList<String> checkUser(String userName, String password) {
+    ArrayList<String> returnList = new ArrayList<>();
     try {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
@@ -47,9 +49,12 @@ public class UserDAOImp {
       if (rs.next()) {
         String storedPassword = rs.getString("password");
         if (password.equals(storedPassword)) {
-          return true;
+          returnList.add(Integer.toString(rs.getInt("adminYes")));
+          returnList.add(rs.getString("firstName"));
+          returnList.add(rs.getString("lastName"));
+          return returnList;
         } else {
-          return false;
+          return null;
         }
       } else {
         System.out.println("User not found, add new user.");
@@ -57,25 +62,27 @@ public class UserDAOImp {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-    return false;
+    return null;
   }
 
   // Add the new user into the database
   // Also store the user into the array
-  public void addUser(String userName, String password, String firstName, String lastName) {
+  public void addUser(
+      int adminYes, String userName, String password, String firstName, String lastName) {
     try {
 
       PreparedStatement ps =
           UserLoginProvider.createConnection()
               .prepareStatement(
-                  "INSERT INTO \"Prototype2_schema\".\"Users\" (userName, password, firstName, lastName) VALUES (?, ?, ?, ?)");
-      ps.setString(1, userName);
-      ps.setString(2, password);
-      ps.setString(3, firstName);
-      ps.setString(4, lastName);
+                  "INSERT INTO \"Prototype2_schema\".\"Users\" (adminYes, userName, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
+      ps.setInt(1, adminYes);
+      ps.setString(2, userName);
+      ps.setString(3, password);
+      ps.setString(4, firstName);
+      ps.setString(5, lastName);
       ps.executeUpdate();
 
-      UserArray.add(new User(userName, password, firstName, lastName));
+      UserArray.add(new User(adminYes, userName, password, firstName, lastName));
       System.out.println("New user added successfully.");
 
     } catch (SQLException e) {

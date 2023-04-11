@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 public class LoginController {
   @FXML private Button loginButton;
-
   @FXML private Button exitButton;
   @FXML private Label loginMessageLabel;
   @FXML private TextField usernameTextField;
@@ -39,7 +38,7 @@ public class LoginController {
     } else if (password.isBlank() == true) {
       loginMessageLabel.setText("Please enter password");
     } else {
-      if (checker.checkUser(username, password)) {
+      if (checker.checkUser(username, password).size() >= 1) {
         Navigation.navigate(Screen.HOME);
       }
       loginMessageLabel.setText("Your username or password is incorrect.");
