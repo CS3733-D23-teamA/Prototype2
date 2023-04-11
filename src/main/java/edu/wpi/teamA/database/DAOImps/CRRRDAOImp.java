@@ -24,7 +24,7 @@ public class CRRRDAOImp implements ICRRRDAO {
   public void addCRRR(ConferenceRoomResRequest crrr) {
     try {
       String name = crrr.getName();
-      int room = crrr.getRoom();
+      String room = crrr.getRoom();
       Date date = crrr.getDate();
       int startTime = crrr.getStartTime();
       int endTime = crrr.getEndTime();
@@ -49,7 +49,7 @@ public class CRRRDAOImp implements ICRRRDAO {
               .prepareStatement(
                   "INSERT INTO \"Prototype2_schema\".\"ConferenceRoomRequest\" VALUES (?, ?, ?, ?, ?, ?, ?)");
       ps.setString(1, name);
-      ps.setInt(2, room);
+      ps.setString(2, room);
       ps.setDate(3, date);
       ps.setInt(4, startTime);
       ps.setInt(5, endTime);
