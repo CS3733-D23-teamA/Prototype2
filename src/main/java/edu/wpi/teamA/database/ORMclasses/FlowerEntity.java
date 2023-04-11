@@ -22,4 +22,14 @@ public class FlowerEntity {
     this.comment = f;
     this.status = g;
   }
+
+  public FlowerEntity() {
+    this.name = null;
+    this.room = 0;
+    this.date = null;
+    this.time = 0;
+    this.flowerType = null;
+    this.comment = null;
+    this.status = null;
+  }
 }
