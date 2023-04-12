@@ -32,7 +32,7 @@ public class CRRRDAOImp implements ICRRRDAO {
       String sqlCreateTable =
           "CREATE TABLE IF NOT EXISTS \"Prototype2_schema\".\"ConferenceRoomRequest\""
               + "(name VARCHAR(600),"
-              + "room INT,"
+              + "room VARCHAR(600),"
               + "date DATE,"
               + "startTime INT,"
               + "endTime INT,"

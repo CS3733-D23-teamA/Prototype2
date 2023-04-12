@@ -2,8 +2,6 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -108,13 +106,6 @@
                                     <TableColumn fx:id="actionCol1" prefWidth="311.0" text="Actions" />
                                  </columns>
                               </TableView>
-                              <MenuButton mnemonicParsing="false" text="Test" GridPane.rowIndex="4">
-                                <items>
-                                  <MenuItem fx:id="flowerMenu" mnemonicParsing="false" onAction="#flowerMenu" text="flower" />
-                                  <MenuItem fx:id="roomMenu" mnemonicParsing="false" onAction="#roomMenu" text="room" />
-                                    <MenuItem fx:id="otherMenu" mnemonicParsing="false" text="other" />
-                                </items>
-                              </MenuButton>
                            </children>
                         </GridPane>
                      </content>

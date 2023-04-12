@@ -57,7 +57,7 @@ public class FlowerRequestController extends PageController implements IServiceC
         || roomCombo.getSelectedIndex() == -1) {
       submitButton.setDisable(true);
     } else {
-      submitButton.setDisable(true);
+      submitButton.setDisable(false);
     }
   }
 
