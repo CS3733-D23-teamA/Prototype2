@@ -34,7 +34,7 @@ public class PathfindingController extends PageController {
 
   @FXML
   private StackPane sp =
-          new StackPane(new ImageView("edu/wpi/teamA/images/map-page/00_thelowerlevel1.png"), topPane);
+      new StackPane(new ImageView("edu/wpi/teamA/images/map-page/00_thelowerlevel1.png"), topPane);
 
   @Override
   public void initialize() {
@@ -43,7 +43,9 @@ public class PathfindingController extends PageController {
     nodeList = nodeDAO.loadNodesFromDatabase();
 
     for (Node node : nodeList) {
-      nodeIDOptions.add(node.getNodeID());
+      if (node.getFloor().equals("L1")) {
+        nodeIDOptions.add(node.getNodeID());
+      }
     }
 
     startSelection.setItems(FXCollections.observableArrayList(nodeIDOptions));
@@ -52,7 +54,6 @@ public class PathfindingController extends PageController {
 
   public void submit() {
     try {
-      clearPane();
 
       AStar a = new AStar(startSelection.getSelectedItem(), endSelection.getSelectedItem());
 
@@ -93,8 +94,8 @@ public class PathfindingController extends PageController {
       line.setStrokeWidth(8);
 
       topPane
-              .getChildren()
-              .addAll(line, new Circle(gNode.getXcoord(), gNode.getYcoord(), 6, Color.DARKRED));
+          .getChildren()
+          .addAll(line, new Circle(gNode.getXcoord(), gNode.getYcoord(), 6, Color.DARKRED));
       lastX = gNode.getXcoord();
       lastY = gNode.getYcoord();
     }
