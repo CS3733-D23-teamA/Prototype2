@@ -1,5 +1,6 @@
 package edu.wpi.teamA.controllers;
 
+import edu.wpi.teamA.App;
 import edu.wpi.teamA.navigation.Navigation;
 import edu.wpi.teamA.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -20,7 +21,7 @@ public class NavigationBarController {
   @FXML private MFXButton mapEditorButton;
   @FXML private MFXButton signageButton;
   @FXML private MFXButton pathfindingButton;
-  // TODO @FXML private MenuItem exitMenu;
+  @FXML private MenuItem exitMenu;
   @FXML private ImageView bwhLogo;
   @FXML private Circle profile;
 
@@ -36,7 +37,7 @@ public class NavigationBarController {
     mapEditorButton.setOnAction(event -> Navigation.navigate(Screen.MAP));
     signageButton.setOnAction(event -> Navigation.navigate(Screen.SIGNAGE));
     pathfindingButton.setOnAction(event -> Navigation.navigate(Screen.PATHFINDING));
-    // exitMenu.setOnAction(event -> App.getPrimaryStage().hide());
+    exitMenu.setOnAction(event -> App.getPrimaryStage().hide());
     bwhLogo.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     // profile.setOnMouseClicked();
   }
