@@ -22,7 +22,7 @@ public class UserDAOImp {
     try {
       Statement stmtUser = UserLoginProvider.createConnection().createStatement();
       String sqlCreateUser =
-          "CREATE TABLE IF NOT EXISTS \"teamadb\".\"Users\" ("
+          "CREATE TABLE IF NOT EXISTS \"Prototype2_schema\".\"Users\" ("
               + "adminYes   int,"
               + "userName   VARCHAR(255) PRIMARY KEY,"
               + "password   VARCHAR(255),"
@@ -41,7 +41,7 @@ public class UserDAOImp {
     try {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
-              .prepareStatement("SELECT * FROM \"teamadb\".\"Users\" WHERE userName = ?");
+              .prepareStatement("SELECT * FROM \"Prototype2_schema\".\"Users\" WHERE userName = ?");
       ps.setString(1, userName);
       ResultSet rs = ps.executeQuery();
 
@@ -78,7 +78,7 @@ public class UserDAOImp {
       PreparedStatement ps =
           UserLoginProvider.createConnection()
               .prepareStatement(
-                  "INSERT INTO \"teamadb\".\"Users\" (adminYes, userName, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
+                  "INSERT INTO \"Prototype2_schema\".\"Users\" (adminYes, userName, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)");
       ps.setInt(1, adminYes);
       ps.setString(2, userName);
       ps.setString(3, password);

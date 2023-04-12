@@ -41,6 +41,7 @@ public class App extends Application {
     final Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
+
     // scene.getStylesheets().add("edu/wpi/teamA/stylesheets/main.css");
 
     Navigation.navigate(Screen.LOGIN);
