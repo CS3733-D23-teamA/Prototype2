@@ -1,4 +1,5 @@
 package edu.wpi.teamA.controllers.Navigation;
+
 import edu.wpi.teamA.database.DAOImps.NodeDAOImp;
 import edu.wpi.teamA.database.ORMclasses.Node;
 import edu.wpi.teamA.pathfinding.AStar;
@@ -16,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import net.kurobako.gesturefx.GesturePane;
+
 public class PathfindingController extends PageController {
   @FXML private MFXFilterComboBox<Integer> startSelection;
   @FXML private MFXFilterComboBox<Integer> endSelection;
@@ -26,21 +28,24 @@ public class PathfindingController extends PageController {
   @FXML private GesturePane gp;
   @FXML private ArrayList<Node> nodeList;
   @FXML private Pane topPane = new Pane();
+
   @FXML
   private StackPane sp =
-          new StackPane(new ImageView("edu/wpi/teamA/images/map-page/00_thelowerlevel1.png"), topPane);
+      new StackPane(new ImageView("edu/wpi/teamA/images/map-page/00_thelowerlevel1.png"), topPane);
+
   @Override
   public void initialize() {
     gp.setContent(sp);
     nodeList = nodeDAO.loadNodesFromDatabase();
     for (Node node : nodeList) {
       if (node.getFloor().equals("L1")) {
-              nodeIDOptions.add(node.getNodeID());
+        nodeIDOptions.add(node.getNodeID());
+      }
     }
-  }
     startSelection.setItems(FXCollections.observableArrayList(nodeIDOptions));
     endSelection.setItems(FXCollections.observableArrayList(nodeIDOptions));
-}
+  }
+
   public void submit() {
     try {
       AStar a = new AStar(startSelection.getSelectedItem(), endSelection.getSelectedItem());
@@ -53,10 +58,12 @@ public class PathfindingController extends PageController {
       // System.out.println(pr);
     }
   }
+
   private void clearPane() {
     sp.getChildren().remove(topPane);
     sp.getChildren().add(topPane);
   }
+
   public void drawPath(AStar a) {
     ArrayList<Integer> nodePathIDs = a.getPath();
     GraphNode gNode = a.getGraphNode(nodePathIDs.get(0));
@@ -70,8 +77,8 @@ public class PathfindingController extends PageController {
       line.setFill(Color.DARKRED);
       line.setStrokeWidth(8);
       topPane
-              .getChildren()
-              .addAll(line, new Circle(gNode.getXcoord(), gNode.getYcoord(), 6, Color.DARKRED));
+          .getChildren()
+          .addAll(line, new Circle(gNode.getXcoord(), gNode.getYcoord(), 6, Color.DARKRED));
       lastX = gNode.getXcoord();
       lastY = gNode.getYcoord();
     }
