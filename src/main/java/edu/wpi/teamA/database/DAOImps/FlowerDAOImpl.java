@@ -103,6 +103,7 @@ public class FlowerDAOImpl implements IFlowerDAO {
         temp.setRoom(room);
         temp.setDate(date);
         temp.setTime(time);
+        temp.setFlowerType(flowerType);
         temp.setComment(comment);
         temp.setStatus(status);
 
