@@ -29,7 +29,8 @@ public class NavigationBarController {
     serviceRequestsButton.setOnAction(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
     flowerMenu.setOnAction(event -> Navigation.navigate(Screen.FLOWER_REQUEST));
     roomMenu.setOnAction(event -> Navigation.navigate(Screen.CONFERENCE_REQUEST));
-    // TODO otherMenu.setOnAction(event -> Navigation.navigate(Screen.SERVICE_REQUEST)); // MAKE SURE TO REFACTOR "OTHER NAME
+    // TODO otherMenu.setOnAction(event -> Navigation.navigate(Screen.SERVICE_REQUEST)); // MAKE
+    // SURE TO REFACTOR "OTHER NAME
     // TODO myRequestsMenu.setOnAction(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
 
     mapEditorButton.setOnAction(event -> Navigation.navigate(Screen.MAP));
